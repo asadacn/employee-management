@@ -12,5 +12,19 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
+Route::get('/dashboard', function () {
+    return view('employees.dashboard.index');
+});
+Route::get('/employees', function () {
+    return view('employees.employee.index');
+});
+Route::get('/departments', function () {
+    return view('employees.department.index');
+});
+Route::get('/ranks', function () {
+    return view('employees.rank.index');
+});
+
+Route::resource('ranks', 'Employee\RankController');
