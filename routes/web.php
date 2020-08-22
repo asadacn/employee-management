@@ -28,3 +28,4 @@ Route::get('/ranks', function () {
 });
 
 Route::resource('ranks', 'Employee\RankController');
+Route::get('rank/search', 'Employee\RankController@search')->name('ranks-search');

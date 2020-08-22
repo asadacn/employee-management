@@ -262,7 +262,7 @@ return [
             'icon'    => 'fas fa-fw fa-users',
             'submenu' => [
                 [
-                    'text' => 'Employee',
+                    'text' => 'Employee List',
                     'url'  => 'employees',
                     'icon' => 'fas fa-fw fa-users'
                 ],]
@@ -274,7 +274,7 @@ return [
             'icon'    => 'fas fa-fw fa-building',
             'submenu' => [
                 [
-                    'text' => 'Department',
+                    'text' => 'Department List',
                     'url'  => 'departments',
                     'icon' => 'fas fa-fw fa-building'
                 ],]
@@ -288,7 +288,7 @@ return [
             'icon'    => 'fas fa-fw fa-layer-group',
             'submenu' => [
                 [
-                    'text' => 'Rank',
+                    'text' => 'Rank List',
                     'url'  => 'ranks',
                     'icon' => 'fas fa-fw fa-layer-group'
                 ],
