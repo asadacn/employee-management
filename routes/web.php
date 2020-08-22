@@ -27,5 +27,10 @@ Route::get('/ranks', function () {
     return view('employees.rank.index');
 });
 
+//RANKS
 Route::resource('ranks', 'Employee\RankController');
 Route::get('rank/search', 'Employee\RankController@search')->name('ranks-search');
+
+//DEPARTMENT
+Route::resource('departments', 'Employee\DepartmentController');
+Route::get('department/search', 'Employee\DepartmentController@search')->name('departments-search');

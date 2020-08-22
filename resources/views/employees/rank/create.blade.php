@@ -30,16 +30,16 @@
               </form>
         </div>
         <div class="card-footer">
-      @if(session()->has('success'))
-          <div class="alert alert-success h5">
-              {{ session()->get('success') }}
-          </div>
-      @endif
-      @if(session()->has('failed'))
-      <div class="alert alert-danger h5">
-          {{ session()->get('failed') }}
-      </div>
-  @endif
+            @if(session()->has('success'))
+            <div class="alert alert-success h5">
+                {{ session()->get('success') }}
+            </div>
+            @endif
+            @if(session()->has('failed'))
+            <div class="alert alert-danger h5">
+                {{ session()->get('failed') }}
+            </div>
+            @endif
         </div>
     </div>
 @stop
