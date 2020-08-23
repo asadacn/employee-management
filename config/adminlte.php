@@ -265,6 +265,11 @@ return [
                     'text' => 'Employee List',
                     'url'  => 'employees',
                     'icon' => 'fas fa-fw fa-users'
+                ],
+                [
+                    'text' => 'Create',
+                    'url'  => 'employees/create',
+                    'icon' => 'fas fa-fw fa-plus-circle'
                 ],]
                
         ],

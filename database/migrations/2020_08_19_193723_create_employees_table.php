@@ -18,6 +18,7 @@ class CreateEmployeesTable extends Migration
             $table->integer('department_id')->nullable()->comment('department');
             $table->integer('rank_id')->nullable()->comment('Rank');
             $table->string('name')->nullable()->comment('Name');
+            $table->date('date_of_birth')->nullable()->comment('Birthday');
             $table->string('contact_no')->nullable()->comment('contact_no');
             $table->string('blood_group')->nullable()->comment('blood_group');
             $table->string('emergency_contact_person')->nullable()->comment('emergency_contact_person');

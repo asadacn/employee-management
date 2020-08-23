@@ -34,3 +34,7 @@ Route::get('rank/search', 'Employee\RankController@search')->name('ranks-search'
 //DEPARTMENT
 Route::resource('departments', 'Employee\DepartmentController');
 Route::get('department/search', 'Employee\DepartmentController@search')->name('departments-search');
+
+//EMPLOYEE
+Route::resource('employees', 'Employee\EmployeeController');
+Route::get('employee/search', 'Employee\EmployeeController@search')->name('employees-search');
