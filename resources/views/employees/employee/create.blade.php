@@ -43,14 +43,14 @@
           <div class="form-row">
           <div class="form-group col-md-8">
             <label for="employee_title" class="text-capitalize">employee title</label>
-            <input id="employee_title" type="text" name="employee_title" class="form-control @error('employee_title') is-invalid @enderror" placeholder="Employee Title">
+            <input id="employee_title" type="text" name="employee_name" class="form-control @error('employee_title') is-invalid @enderror" placeholder="Employee Title" value="{{old('employee_name')}}">
             @error('employee_title')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group col-md-4">
             <label for="date_of_birth" class="text-capitalize">Date of Birth</label>
-            <input id="date_of_birth" type="date" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror" placeholder="Employee Title">
+            <input id="date_of_birth" type="date" name="date_of_birth" class="form-control @error('date_of_birth') is-invalid @enderror" placeholder="Employee Title" value="{{old('date_of_birth')}}">
             @error('date_of_birth')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
@@ -60,21 +60,21 @@
 
           <div class="form-group col-md-4">
             <label for="contact_no" class="text-capitalize">contact no.</label>
-            <input id="contact_no" type="text" name="contact_no" class="form-control @error('contact_no') is-invalid @enderror" placeholder="Contact No.">
+            <input id="contact_no" type="text" name="contact_no" class="form-control @error('contact_no') is-invalid @enderror" placeholder="Contact No." value="{{old('contact_no')}}">
             @error('contact_no')
                 <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group col-md-4">
             <label for="emg_contact_no" class="text-capitalize">Emergency contact no.</label>
-            <input id="emg_contact_no" type="text" name="emg_contact_no" autocomplete="mobile" class="form-control @error('emg_contact_no') is-invalid @enderror" placeholder="Contact No.">
+            <input id="emg_contact_no" type="text" name="emergency_contact_no" autocomplete="mobile" class="form-control @error('emg_contact_no') is-invalid @enderror" placeholder="Emergency Contact No." value="{{old('emg_contact_no')}}">
             @error('emg_contact_no')
                 <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group col-md-4">
             <label for="blood_group" class="text-capitalize">blood group</label>
-            <input id="blood_group" type="text" name="blood_group" class="form-control @error('blood_group') is-invalid @enderror" placeholder="Blood Group">
+            <input id="blood_group" type="text" name="blood_group" class="form-control @error('blood_group') is-invalid @enderror" placeholder="Blood Group" value="{{old('blood_group')}}">
             @error('blood_group')
                 <div class=" text-danger">{{ $message }}</div>
             @enderror
@@ -84,7 +84,7 @@
 
           <div class="form-group">
            <label for="address" class="text-capitalize">address</label>
-           <textarea id="address" type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Address"></textarea>
+           <textarea id="address" type="text" name="address" class="form-control @error('address') is-invalid @enderror" placeholder="Address"> {{old('address')}}</textarea>
            @error('address')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
@@ -94,14 +94,14 @@
 
           <div class="form-group col-md-6">
             <label for="salary" class="text-capitalize">salary</label>
-            <input id="salary" type="number" name="salary" class="form-control @error('salary') is-invalid @enderror" placeholder="Salary">
+            <input id="salary" type="number" name="salary" class="form-control @error('salary') is-invalid @enderror" placeholder="Salary" value="{{old('salary')}}">
             @error('salary')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group col-md-6">
             <label for="hired_at" class="text-capitalize">hired at</label>
-            <input id="hired_at" type="date" name="hired_at" class="form-control @error('hired_at') is-invalid @enderror" placeholder="Blood Group">
+            <input id="hired_at" type="date" name="hired_at" class="form-control @error('hired_at') is-invalid @enderror" placeholder="Blood Group" value="{{old('hired_at')}}">
             @error('hired_at')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
@@ -113,14 +113,14 @@
 
           <div class="form-group col-md-4">
             <label for="Photo" class="text-capitalize">Photo</label>
-            <input id="Photo" type="file" name="Photo" class="form-control @error('Photo') is-invalid @enderror" placeholder="Salary">
+            <input id="Photo" type="file" name="Photo" class="form-control @error('Photo') is-invalid @enderror" placeholder="Salary" value="{{old('photo')}}">
             @error('Photo')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
           <div class="form-group col-md-4">
             <label for="nid" class="text-capitalize">NID</label>
-            <input id="nid" type="text" name="nid" class="form-control @error('nid') is-invalid @enderror" placeholder="NID NO.">
+            <input id="nid" type="text" name="nid" class="form-control @error('nid') is-invalid @enderror" placeholder="NID NO." value="{{old('nid')}}">
             @error('nid')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror

@@ -25,13 +25,33 @@ class EmployeeController extends Controller
     {
           
         $request->validate([
-            'employee_title' => 'required|unique:employees,title|max:100',
-            'description' => 'string|nullable|max:255',
+            'employee_name' => 'required|max:100',
+            'department' => 'required',
+            'rank' => 'required',
+            'contact_no' => 'numeric',
+            'blood_group' => 'max:2',
+            'emergency_contact_no' => 'numeric',
+            'address' => 'string',
+            'salary'=> 'numeric',
+            'hired_at' => 'date',
+            'photo' => 'file|size:2048',
+            'nid' => 'max:17|min:13',
         ]);
 
             $employee = new Employee();
-            $employee->title = $request->employee_title;
-            $employee->description = $request->description;
+            $employee->name = $request->employee_title;
+            $employee->department_id = $request->department;
+            $employee->rank_id = $request->rank;
+            $employee->contact_no = $request->contact_no;
+            $employee->blood_group = $request->blood_group;
+            $employee->emergency_contact_no = $request->emergency_contact_no;
+            $employee->address = $request->address;
+            $employee->salary = $request->salary;
+            $employee->hired_at = $request->hired_at;
+            $employee->nid = $request->nid;
+            $employee->status = $request->status;
+            $employee->save();
+
             
             if($employee->save()){
                 return redirect()->back()->with('success','Employee Created');
