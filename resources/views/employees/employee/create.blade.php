@@ -10,7 +10,7 @@
 <div class="card w-50">
   <div class="card-header">Create New Employee</div>
    <div class="card-body">
-   <form action="{{route('employees.store')}}" method="POST">
+   <form action="{{route('employees.store')}}" method="POST" enctype="multipart/form-data">
          {{ csrf_field() }}
 
           <div class="form-row">
@@ -112,9 +112,9 @@
         <div class="form-row">
 
           <div class="form-group col-md-4">
-            <label for="Photo" class="text-capitalize">Photo</label>
-            <input id="Photo" type="file" name="Photo" class="form-control @error('Photo') is-invalid @enderror" placeholder="Salary" value="{{old('photo')}}">
-            @error('Photo')
+            <label for="photo" class="text-capitalize">Photo</label>
+            <input id="photo" type="file" name="photo" class="form-control @error('photo') is-invalid @enderror" value="{{old('photo')}}">
+            @error('photo')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>
@@ -145,6 +145,15 @@
          </form>
    </div>
    <div class="card-footer">
+    @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
        @if(session()->has('success'))
        <div class="alert alert-success h5">
            {{ session()->get('success') }}

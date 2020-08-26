@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Employee;
 use App\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
+use Intervention\Image\ImageManagerStatic as Image;
 class EmployeeController extends Controller
 {
     
@@ -28,14 +28,13 @@ class EmployeeController extends Controller
             'employee_name' => 'required|max:100',
             'department' => 'required',
             'rank' => 'required',
-            'contact_no' => 'numeric',
-            'blood_group' => 'max:2',
-            'emergency_contact_no' => 'numeric',
-            'address' => 'string',
-            'salary'=> 'numeric',
-            'hired_at' => 'date',
-            'photo' => 'file|size:2048',
-            'nid' => 'max:17|min:13',
+            'contact_no' => 'nullable|numeric',
+            'blood_group' => 'nullable|max:2',
+            'emergency_contact_no' => 'nullable|numeric',
+            'salary'=> 'nullable|numeric',
+            'hired_at' => 'nullable|date',
+            'photo' => 'nullable|image|mimes:jpeg,bmp,png,gif|max:2048',
+            'nid' => 'nullable|max:17|min:13',
         ]);
 
             $employee = new Employee();
@@ -50,7 +49,13 @@ class EmployeeController extends Controller
             $employee->hired_at = $request->hired_at;
             $employee->nid = $request->nid;
             $employee->status = $request->status;
-            $employee->save();
+
+            if($request->hasFile('photo')){
+                // resizing an uploaded file
+                $employee->photo = $this->imageUpload($request);
+            }
+
+           // $employee->save();
 
             
             if($employee->save()){
@@ -107,4 +112,26 @@ class EmployeeController extends Controller
 
         return view('employees.employee.index',compact('employees'));
     }
+
+    protected function imageUpload(Request $request)
+    {
+
+         $fileName=null;
+
+         if ($request->hasFile('photo')) {
+
+          // read image from temporary file
+            $img = Image::make($_FILES['photo']['tmp_name']);
+            $img->encode('webp', 95);
+            $fileName = 'employee-'.time().'.webp';
+
+            // resize image
+            $img->fit(400, 500)->sharpen(8)->save('uploads/employee/'.$fileName);
+            // $img->resize(500, 500)->sharpen()->save(productImgCover().$fileName);
+            // $img->resize(125, 120)->sharpen()->save(productImgThumbnil().$fileName);
+
+          return $fileName;
+        }
+    }
+
 }
