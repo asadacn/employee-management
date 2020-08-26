@@ -34,6 +34,7 @@ class EmployeeController extends Controller
             'emergency_contact_no' => 'nullable|numeric',
             'salary'=> 'nullable|numeric',
             'hired_at' => 'nullable|date',
+            'birthday' => 'nullable|date',
             'photo' => 'nullable|image|mimes:jpeg,bmp,png,gif|max:2048',
             'nid' => 'nullable|max:17|min:13',
         ]);
@@ -48,6 +49,7 @@ class EmployeeController extends Controller
             $employee->address = $request->address;
             $employee->salary = $request->salary;
             $employee->hired_at = $request->hired_at;
+            $employee->date_of_birth = $request->birthday;
             $employee->nid = $request->nid;
             $employee->status = $request->status;
 
@@ -69,7 +71,8 @@ class EmployeeController extends Controller
 
     public function show($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        return view('employees.employee.view',compact('employee'));
     }
 
 
@@ -82,14 +85,39 @@ class EmployeeController extends Controller
 
     public function update(Request $request, $id)
     {
+           
         $request->validate([
-            'employee_title' => 'required|max:100|unique:employees,title,'.$id,
-            'description' => 'string|nullable|max:255',
+            'employee_name' => 'required|max:100',
+            'department' => 'required',
+            'rank' => 'required',
+            'contact_no' => 'nullable|numeric',
+            'blood_group' => 'nullable|max:2',
+            'emergency_contact_no' => 'nullable|numeric',
+            'salary'=> 'nullable|numeric',
+            'hired_at' => 'nullable|date',
+            'birthday' => 'nullable|date',
+            'photo' => 'nullable|image|mimes:jpeg,bmp,png,gif|max:2048',
+            'nid' => 'nullable|max:17|min:13',
         ]);
 
             $employee = Employee::findOrFail($id);
-            $employee->title = $request->employee_title;
-            $employee->description = $request->description;
+            $employee->name = $request->employee_name;
+            $employee->department_id = $request->department;
+            $employee->rank_id = $request->rank;
+            $employee->contact_no = $request->contact_no;
+            $employee->blood_group = $request->blood_group;
+            $employee->emergency_contact_no = $request->emergency_contact_no;
+            $employee->address = $request->address;
+            $employee->salary = $request->salary;
+            $employee->hired_at = $request->hired_at;
+            $employee->date_of_birth = $request->birthday;
+            $employee->nid = $request->nid;
+            $employee->status = $request->status;
+
+            if($request->hasFile('photo')){
+                // resizing and uploading file
+                $employee->photo = $this->imageUpload($request);
+            }
             
             if($employee->save()){
                 return redirect()->back()->with('success','Employee Updated');
@@ -109,7 +137,10 @@ class EmployeeController extends Controller
 
     public function search(Request $request)
     {
-        $employees = Employee::where('title','like',"%".$request->search."%")->orWhere('description','like',"%".$request->search)->get();
+        $employees = Employee::where('name','like',"%".$request->search."%")
+                                ->orWhere('contact_no','like',"%".$request->search)
+                                ->orWhere('nid','like',"%".$request->search)
+                                ->get();
 
         return view('employees.employee.index',compact('employees'));
     }

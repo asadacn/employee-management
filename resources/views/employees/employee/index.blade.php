@@ -7,7 +7,7 @@
 @stop
 
 @section('content')
-    <div class="card w-75">
+    <div class="card col-lg-7">
     <div class="card-header">
         <form action="{{route('employees-search')}}" method="GET">
             @csrf
@@ -23,14 +23,15 @@
           
        </div>
        @if(session()->has('success'))
-       <div class="alert alert-success h5">
+       <div class="alert alert-success h5 my-2">
            {{ session()->get('success') }}
        </div>
         @endif
         <div class="card-body table-responsive">
             <table class="table table-border">
-            <thead>
+            <thead class="text-uppercase">
                 <th>SN.</th>
+                <th>Image</th>
                 <th>Name</th>
                 <th>Department</th>
                 <th>Rank</th>
@@ -48,13 +49,15 @@
                 @foreach ($employees as $employee)
                     <tr>
                     <td>{{++$i}}</td>
+                    <td><a href="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : '#'}}"><img class="rounded shadow-sm" src="{{asset('uploads/employee')}}/{{$employee->photo}}" alt="img" width="50px"></a></td>
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->department->title}}</td>
                     <td>{{$employee->rank->title}}</td>
                     <td>{{$employee->contact_no}}</td>
                 
                         <td><div class="btn-group" role="group" aria-label="Basic example">
-                        <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-sm rounded-0 btn-secondary">Edit</a>
+                            <a href="{{route('employees.show',$employee->id)}}" class="btn btn-sm rounded-0 btn-primary">View</a>
+                        <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-sm rounded-0 btn-dark">Edit</a>
                         <form action="{{ route('employees.destroy', $employee->id)}}" method="post">
                             @csrf
                             @method('DELETE')
