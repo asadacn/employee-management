@@ -38,3 +38,6 @@ Route::get('department/search', 'Employee\DepartmentController@search')->name('d
 //EMPLOYEE
 Route::resource('employees', 'Employee\EmployeeController');
 Route::get('employee/search', 'Employee\EmployeeController@search')->name('employees-search');
+
+//SALARY
+Route::resource('salary-payable', 'Employee\PayableSalaryController');

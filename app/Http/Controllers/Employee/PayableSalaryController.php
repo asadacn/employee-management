@@ -15,7 +15,7 @@ class PayableSalaryController extends Controller
     
     public function create()
     {
-        //
+        return view('employees.salary.create');
     }
 
     

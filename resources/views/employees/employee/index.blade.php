@@ -56,7 +56,7 @@
                     <td>{{$employee->contact_no}}</td>
                 
                         <td>
-                            <div class="btn-group mb-1" role="group" aria-label="Basic example">
+                            <div class="btn-group mb-1" role="group">
                                 <a href="{{route('employees.show',$employee->id)}}"
                                     class="btn btn-sm rounded-0 btn-primary">View</a>
                                 <a href="{{route('employees.edit',$employee->id)}}"
@@ -70,8 +70,8 @@
                                 </form>
                             </div>
 
-                            <div class="btn-group mb-1" role="group" aria-label="Basic example">
-                                <a href="{{route('employees.show',$employee->id)}}"
+                            <div class="btn-group mb-1" role="group" >
+                                <a href="{{route('salary-payable.create')}}"
                                     class="btn btn-sm rounded-0 btn-info">Generate Salary</a>
                                 <a href="{{route('employees.edit',$employee->id)}}"
                                     class="btn btn-sm rounded-0 btn-warning">Pay Now</a>
