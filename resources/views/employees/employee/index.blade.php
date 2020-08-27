@@ -80,7 +80,7 @@
                             <div class="btn-group mb-2 shadow-sm" role="group" >
                                 <a title="Generate Salary" href="{{route('salary-payable.show',$employee->id)}}"
                                 class="btn btn-sm  btn-outline-dark">Salary</a>
-                            <a title="Pay Salary" href="{{route('employees.edit',$employee->id)}}"
+                            <a title="Pay Salary" href="{{route('salary-payable.edit',$employee->id)}}"
                                 class="btn btn-sm  btn-outline-dark">Pay </a>
                                 
                             </div>

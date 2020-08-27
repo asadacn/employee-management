@@ -62,19 +62,25 @@ class PayableSalaryController extends Controller
     public function show($id)
     {
         $employee = Employee::findOrFail($id);
-        return view('employees.salary.create',compact('employee'));
+        return view('employees.salary.generate',compact('employee'));
     }
 
     
     public function edit($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        return view('employees.salary.pay',compact('employee'));
     }
 
     
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'amount' => 'numeric|required',
+            'paid_at' => 'required'
+        ]);
+
+        
     }
 
     

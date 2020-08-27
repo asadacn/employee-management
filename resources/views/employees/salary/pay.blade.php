@@ -44,53 +44,36 @@
                             <td>:</td>
                             <td>{{$employee->salary}} Tk.</td>
                         </tr>
+                        <tr class="bg-danger">
+                            <th>Payble Salary</th>
+                            <td>:</td>
+                            <td>{{$employee->payable()->payable_salary ?? '0'}} Tk.</td>
+                        </tr>
                     </table>
                 </div>
             </div>
 
-        <form action="{{route('salary-payable.store')}}" method="POST">
+        <form action="{{route('salary-payable.update')}}" method="POST">
               {{ csrf_field() }}
                 <input type="hidden" name="employee_id" value="{{$employee->id}}">
                 <div class="form-row">
                <div class="form-group col-4">
-                 <label for="month" class="text-capitalize">Month</label>
-                 <select id="month" type="text" name="month" class="form-control @error('month') is-invalid @enderror">
-                    <option value="">Choose Month</option>
-                   
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                    </select>
-                 @error('month')
+                 <label for="amount" class="text-capitalize">salary amount</label>
+                 <input type="text" class="form-control " name="amount" placeholder="Salary amount" value="{{$employee->payable()->payable_salary ?? 0}}">
+                 @error('amount')
                       <div class=" text-danger">{{ $message }}</div>
                  @enderror
                </div>
                <div class="form-group col-4">
-                <label for="leave" class="text-capitalize">leave (days)</label>
-                <input id="leave" type="text" name="leave" class="form-control @error('leave') is-invalid @enderror" placeholder="leave days">
-                @error('leave')
+                <label for="paid_at" class="text-capitalize">Paid at</label>
+               <input id="paid_at" type="date" name="paid_at" class="form-control @error('paid_at') is-invalid @enderror" value="{{date('Y-m-d')}}">
+                @error('paid_at')
                       <div class=" text-danger">{{ $message }}</div>
                  @enderror
               </div>
               
             </div>
-            <div class="form-group form-check">
-                <input type="checkbox" name="ignore_leave" class="form-check-input" id="ignore_leave">
-                <label class="form-check-label" for="ignore_leave">Ignore leave</label>
-          </div>
-            <div class="form-group form-check">
-                <input type="checkbox" name="paid" class="form-check-input" id="paid">
-                <label class="form-check-label" for="paid">Paid</label>
-          </div>
+            
                 <button type="submit" class="btn btn-primary">Generate Salary</button>
               </form>
         </div>
