@@ -10,7 +10,23 @@
 <div class="card col-lg-6">
   <div class="card-header"> Employee Details</div>
    <div class="card-body">
-   
+
+    <div class="form-row">
+      <div class="form-group col-md-8">
+        <label for="employee_title" class="text-capitalize">employee title</label>
+        <input disabled id="employee_title" type="text" name="employee_name" class="form-control @error('employee_title') is-invalid @enderror" placeholder="Employee Title" value="{{$employee->name}}">
+        @error('employee_title')
+             <div class=" text-danger">{{ $message }}</div>
+        @enderror
+      </div>
+      <div class="form-group col-md-4">
+        <label for="birthday" class="text-capitalize">Date of Birth</label>
+        <input disabled id="birthday" type="date" name="birthday" class="form-control @error('birthday') is-invalid @enderror" value="{{$employee->date_of_birth}}">
+        @error('birthday')
+             <div class=" text-danger">{{ $message }}</div>
+        @enderror
+      </div>
+      </div>
         
           <div class="form-row">
             <div class="form-group col-md-6">
@@ -39,22 +55,7 @@
               @enderror
             </div>
           </div>
-          <div class="form-row">
-          <div class="form-group col-md-8">
-            <label for="employee_title" class="text-capitalize">employee title</label>
-            <input disabled id="employee_title" type="text" name="employee_name" class="form-control @error('employee_title') is-invalid @enderror" placeholder="Employee Title" value="{{$employee->name}}">
-            @error('employee_title')
-                 <div class=" text-danger">{{ $message }}</div>
-            @enderror
-          </div>
-          <div class="form-group col-md-4">
-            <label for="birthday" class="text-capitalize">Date of Birth</label>
-            <input disabled id="birthday" type="date" name="birthday" class="form-control @error('birthday') is-invalid @enderror" value="{{$employee->date_of_birth}}">
-            @error('birthday')
-                 <div class=" text-danger">{{ $message }}</div>
-            @enderror
-          </div>
-          </div>
+
         <div class="form-row">
 
           <div class="form-group col-md-4">
@@ -113,7 +114,7 @@
           <div class="form-group col-md-4">
             <label for="photo" class="text-capitalize">Photo</label>
             {{-- <input disabled id="photo" type="file" name="photo" class="form-control @error('photo') is-invalid @enderror" > --}}
-            <img class="shadow-sm rounded m-2" src="{{asset('uploads/employee')}}/{{$employee->photo}}" alt="img" width="100px">
+            <img class="shadow-sm rounded m-2" src="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}" alt="img" width="100px">
             @error('photo')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror

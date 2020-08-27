@@ -42,9 +42,9 @@
           </div>
           <div class="form-row">
           <div class="form-group col-md-8">
-            <label for="employee_title" class="text-capitalize">employee title</label>
-            <input id="employee_title" type="text" name="employee_name" class="form-control @error('employee_title') is-invalid @enderror" placeholder="Employee Title" value="{{old('employee_name')}}">
-            @error('employee_title')
+            <label for="employee_name" class="text-capitalize">employee title</label>
+            <input id="employee_name" type="text" name="employee_name" class="form-control @error('employee_name') is-invalid @enderror" placeholder="Employee Name" value="{{old('employee_name')}}">
+            @error('employee_name')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror
           </div>

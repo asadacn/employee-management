@@ -40,7 +40,7 @@ class EmployeeController extends Controller
         ]);
 
             $employee = new Employee();
-            $employee->name = $request->employee_title;
+            $employee->name = $request->employee_name;
             $employee->department_id = $request->department;
             $employee->rank_id = $request->rank;
             $employee->contact_no = $request->contact_no;
@@ -158,7 +158,7 @@ class EmployeeController extends Controller
             $fileName = 'employee-'.time().'.webp';
 
             // resize image
-            $img->fit(400, 500)->sharpen(8)->save('uploads/employee/'.$fileName);
+            $img->fit(480, 480)->sharpen(8)->save('uploads/employee/'.$fileName);
             // $img->resize(500, 500)->sharpen()->save(productImgCover().$fileName);
             // $img->resize(125, 120)->sharpen()->save(productImgThumbnil().$fileName);
 

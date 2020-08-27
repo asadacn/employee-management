@@ -7,26 +7,91 @@
 @stop
 
 @section('content')
-    <div class="card w-50">
-       <div class="card-header">Generate New Salary</div>
+    <div class="card col-lg-6">
+       <div class="card-header">Generate Employee Salary</div>
         <div class="card-body">
-        <form action="{{route('ranks.store')}}" method="POST">
+            <div class="card">
+                <div class="card-header">Employee Information</div>
+                <div class="card-body">
+                    <table class="table table-striped table-sm">
+                        <tr>
+                            <th>Photo</th>
+                            <td>:</td>
+                        <td><img class="rounded" src="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}" alt="img" width="80px"></td>
+                        </tr>
+                        <tr>
+                            <th>Name</th>
+                            <td>:</td>
+                            <td>{{$employee->name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Contact</th>
+                            <td>:</td>
+                            <td>{{$employee->contact_no}}</td>
+                        </tr>
+                        <tr>
+                            <th>Department</th>
+                            <td>:</td>
+                            <td>{{$employee->department->title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Rank</th>
+                            <td>:</td>
+                            <td>{{$employee->rank->title}}</td>
+                        </tr>
+                        <tr>
+                            <th>Salary</th>
+                            <td>:</td>
+                            <td>{{$employee->salary}} Tk.</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+        <form action="{{route('salary-payable.store')}}" method="POST">
               {{ csrf_field() }}
-               <div class="form-group">
-                 <label for="rank_title" class="text-capitalize">rank title</label>
-                 <input id="rank_title" type="text" name="rank_title" class="form-control @error('rank_title') is-invalid @enderror" placeholder="Ex. Manager / Director etc.">
-                 @error('rank_title')
+                <input type="hidden" name="employee_id" value="{{$employee->id}}">
+                <div class="form-row">
+               <div class="form-group col-4">
+                 <label for="month" class="text-capitalize">Month</label>
+                 <select id="month" type="text" name="month" class="form-control @error('month') is-invalid @enderror">
+                    <option value="">Choose Month</option>
+                   
+                    <option value="1">January</option>
+                    <option value="2">February</option>
+                    <option value="3">March</option>
+                    <option value="4">April</option>
+                    <option value="5">May</option>
+                    <option value="6">June</option>
+                    <option value="7">July</option>
+                    <option value="8">August</option>
+                    <option value="9">September</option>
+                    <option value="10">October</option>
+                    <option value="11">November</option>
+                    <option value="12">December</option>
+                    </select>
+                 @error('month')
                       <div class=" text-danger">{{ $message }}</div>
                  @enderror
                </div>
-               <div class="form-group">
-                <label for="description" class="text-capitalize">description</label>
-                <textarea id="description" type="text" name="description" class="form-control @error('description') is-invalid @enderror" placeholder="Ex. Manager / Director etc."></textarea>
-                @error('description')
+               <div class="form-group col-4">
+                <label for="leave" class="text-capitalize">leave (days)</label>
+                <input id="leave" type="text" name="leave" class="form-control @error('leave') is-invalid @enderror" placeholder="leave days">
+                @error('leave')
                       <div class=" text-danger">{{ $message }}</div>
                  @enderror
               </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
+              
+            </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="ignore_leave" class="form-check-input" id="ignore_leave">
+                <label class="form-check-label" for="ignore_leave">Ignore leave</label>
+          </div>
+            <div class="form-group form-check">
+                <input type="checkbox" name="paid" class="form-check-input" id="paid">
+                <label class="form-check-label" for="paid">Paid</label>
+          </div>
+                <button type="submit" class="btn btn-primary">Generate Salary</button>
               </form>
         </div>
         <div class="card-footer">

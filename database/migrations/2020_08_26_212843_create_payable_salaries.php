@@ -17,9 +17,11 @@ class CreatePayableSalaries extends Migration
             $table->bigIncrements('id');
             $table->unsignedInteger('employee_id');
             $table->integer('leave')->nullable()->comment('number of days out of work');
+            $table->enum('leave_ignore',['yes','no'])->default('no')->comment('Salary is paid or not');
             $table->double('payable_salary')->comment('salay after deducting leave');
             $table->smallInteger('month')->comment('Month: 1=>Janu, 2=>Feb, 3 =>March ..');
-            $table->boolean('is_paid')->default(0)->comment('Salary is paid or not');
+            $table->string('year');
+            $table->enum('is_paid',['yes','no'])->default('no')->comment('Salary is paid or not');
             $table->timestamps();
         });
     }

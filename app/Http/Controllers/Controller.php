@@ -14,11 +14,11 @@ public $MAC ;
 
 public function __construct()
 {
-    $this->MAC = exec('getmac');
-    $this->MAC = strtok($this->MAC, ' ');
-    if(!$this->MAC == '28-6C-07-94-95-6C'){
-       exit;
-    }
+    // $this->MAC = exec('getmac');
+    // $this->MAC = strtok($this->MAC, ' ');
+    // if($this->MAC != '28-6C-07-94-95-6C'){
+    //    exit;
+    // }
 }
     
     

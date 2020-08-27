@@ -7,40 +7,43 @@
 @stop
 
 @section('content')
-    <div class="card col-lg-7">
-    <div class="card-header">
+    <div class="card col-lg-10">
+    <div class="card-header ">
         <form action="{{route('employees-search')}}" method="GET">
             @csrf
-           <div class="form-row"> <a href="{{route('employees.create')}}" class="btn  btn-outline-secondary mr-1"><i class="fas fa-plus-circle"></i></a>
-            <div class="input-group  w-50">
-            
+           <div class="form-row pl-4 py-2"> 
+            <div class="input-group  col-lg-5">
+                <div  class="input-group-prepend"> <a href="{{route('employees.create')}}" class="btn  btn-outline-secondary "><i class="fas fa-plus-circle"></i></a></div>
+           
                 <input type="search" class="form-control " name="search" placeholder="Search Employees" aria-label="Search Employees" aria-describedby="button-addon2" required>
                 <div class="input-group-append">
                   <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
                 </div>
+            </div>
             </form>
         </div>
           
-       </div>
+       
        @if(session()->has('success'))
        <div class="alert alert-success h5 my-2">
            {{ session()->get('success') }}
        </div>
         @endif
         <div class="card-body table-responsive">
-            <table class="table table-border">
-            <thead class="text-uppercase">
+            <table class="table table-bordered">
+            <thead class="text-uppercase thead-light">
                 <th>SN.</th>
                 <th>Image</th>
                 <th>Name</th>
                 <th>Department</th>
                 <th>Rank</th>
                 <th>Contact</th>
+                <th class="text-center">Actions</th>
             </thead>
             <tbody>
                 @if($employees->isEmpty())
                 <tr>
-                    <td colspan="4"> <div class="alert alert-secondary h4 text-center">NO DATA AVAILABLE</div></td>
+                    <td colspan="7"> <div class="alert alert-secondary h4 text-center">NO DATA AVAILABLE</div></td>
                 </tr>
                 @endif
                @php
@@ -49,32 +52,36 @@
                 @foreach ($employees as $employee)
                     <tr>
                     <td>{{++$i}}</td>
-                    <td><a href="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : '#'}}"><img class="rounded shadow-sm" src="{{asset('uploads/employee')}}/{{$employee->photo}}" alt="img" width="50px"></a></td>
+                    <td><a href="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}"><img class="rounded shadow-sm" src="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}" alt="img" width="50px"></a></td>
                     <td>{{$employee->name}}</td>
                     <td>{{$employee->department->title}}</td>
                     <td>{{$employee->rank->title}}</td>
                     <td>{{$employee->contact_no}}</td>
                 
-                        <td>
-                            <div class="btn-group mb-1" role="group">
+                        <td class="text-center">
+                            <div class="btn-group mb-2 shadow-sm" role="group">
                                 <a href="{{route('employees.show',$employee->id)}}"
-                                    class="btn btn-sm rounded-0 btn-primary">View</a>
+                                 title="View"   class="btn btn-sm rounded-0 btn-light"> <i class="fas fa-eye"></i></a>
                                 <a href="{{route('employees.edit',$employee->id)}}"
-                                    class="btn btn-sm rounded-0 btn-dark">Edit</a>
+                                  title="Edit"  class="btn btn-sm rounded-0 btn-light"> <i class="fas fa-user-edit"></i></a>
                                 <form action="{{ route('employees.destroy', $employee->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <button class="btn rounded-0  btn-sm btn-danger"
-                                        onclick="return confirm('Do you want to delete ?')"
-                                        type="submit">Delete</button>
+                                    <button class="btn rounded-0  btn-sm btn-light"
+                                      title="Delete"  onclick="return confirm('Do you want to delete ?')"
+                                        type="submit"><i class="fas fa-trash-alt"></i></button>
                                 </form>
+                                {{-- <a title="Generate Salary" href="{{route('salary-payable.create')}}"
+                                class="btn btn-sm  btn-outline-dark">Salary</a>
+                            <a title="Pay Salary" href="{{route('employees.edit',$employee->id)}}"
+                                class="btn btn-sm  btn-outline-dark">Pay </a> --}}
                             </div>
 
-                            <div class="btn-group mb-1" role="group" >
-                                <a href="{{route('salary-payable.create')}}"
-                                    class="btn btn-sm rounded-0 btn-info">Generate Salary</a>
-                                <a href="{{route('employees.edit',$employee->id)}}"
-                                    class="btn btn-sm rounded-0 btn-warning">Pay Now</a>
+                            <div class="btn-group mb-2 shadow-sm" role="group" >
+                                <a title="Generate Salary" href="{{route('salary-payable.show',$employee->id)}}"
+                                class="btn btn-sm  btn-outline-dark">Salary</a>
+                            <a title="Pay Salary" href="{{route('employees.edit',$employee->id)}}"
+                                class="btn btn-sm  btn-outline-dark">Pay </a>
                                 
                             </div>
                         </td>
