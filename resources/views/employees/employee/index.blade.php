@@ -55,15 +55,29 @@
                     <td>{{$employee->rank->title}}</td>
                     <td>{{$employee->contact_no}}</td>
                 
-                        <td><div class="btn-group" role="group" aria-label="Basic example">
-                            <a href="{{route('employees.show',$employee->id)}}" class="btn btn-sm rounded-0 btn-primary">View</a>
-                        <a href="{{route('employees.edit',$employee->id)}}" class="btn btn-sm rounded-0 btn-dark">Edit</a>
-                        <form action="{{ route('employees.destroy', $employee->id)}}" method="post">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn rounded-0  btn-sm btn-danger" onclick="return confirm('Do you want to delete ?')" type="submit">Delete</button>
-                          </form>
-                          </div></td>
+                        <td>
+                            <div class="btn-group mb-1" role="group" aria-label="Basic example">
+                                <a href="{{route('employees.show',$employee->id)}}"
+                                    class="btn btn-sm rounded-0 btn-primary">View</a>
+                                <a href="{{route('employees.edit',$employee->id)}}"
+                                    class="btn btn-sm rounded-0 btn-dark">Edit</a>
+                                <form action="{{ route('employees.destroy', $employee->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="btn rounded-0  btn-sm btn-danger"
+                                        onclick="return confirm('Do you want to delete ?')"
+                                        type="submit">Delete</button>
+                                </form>
+                            </div>
+
+                            <div class="btn-group mb-1" role="group" aria-label="Basic example">
+                                <a href="{{route('employees.show',$employee->id)}}"
+                                    class="btn btn-sm rounded-0 btn-info">Generate Salary</a>
+                                <a href="{{route('employees.edit',$employee->id)}}"
+                                    class="btn btn-sm rounded-0 btn-warning">Pay Now</a>
+                                
+                            </div>
+                        </td>
                     </tr>
                 @endforeach
 
