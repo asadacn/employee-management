@@ -16,13 +16,14 @@ class PayableSalaryController extends Controller
     }
 
     
-    public function create()
+    public function create($id)
     {
-       //
+        $employee = Employee::findOrFail($id);
+        return view('employees.salary.generate',compact('employee'));
     }
 
     
-    public function store(Request $request)
+    public function generate(Request $request)
     {
         $request->validate([
             'leave' => 'numeric|nullable',
@@ -33,12 +34,25 @@ class PayableSalaryController extends Controller
         $employee  =  Employee::findOrFail($request->employee_id);
         $payable_salary = 0;
         $year =date('Y');
+
             if($request->leave){
                 $payable_salary = ($employee->salary * (30-$request->leave))/30;
             }
-            if($request->ignore_leave){
+            elseif($request->ignore_leave){
                 $payable_salary = $employee->salary;
+            }else{
+                $payable_salary =$employee->salary;
             }
+            
+            $hasPayable = PayableSalary::where('employee_id',$request->employee_id)
+                                              ->where('is_paid','no')
+                                              ->where('month',$request->month)
+                                              ->get();
+
+            if($hasPayable->isNotEmpty()){
+                return redirect()->back()->with('failed','Payable Salary Already Exist');
+            }
+            
 
             $payable = new PayableSalary;
             $payable->employee_id = $request->employee_id ;
@@ -47,7 +61,7 @@ class PayableSalaryController extends Controller
             $payable->payable_salary = $payable_salary ;
             $payable->month = $request->month ;
             $payable->year = $year ;
-            $payable->is_paid = $request->paid == 'on' ? 'Yes' : 'No';
+            // $payable->is_paid = $request->paid == 'on' ? 'Yes' : 'No';
 
             //$payable->save();
 
@@ -61,15 +75,13 @@ class PayableSalaryController extends Controller
    
     public function show($id)
     {
-        $employee = Employee::findOrFail($id);
-        return view('employees.salary.generate',compact('employee'));
+        //
     }
 
     
     public function edit($id)
     {
-        $employee = Employee::findOrFail($id);
-        return view('employees.salary.pay',compact('employee'));
+        //
     }
 
     

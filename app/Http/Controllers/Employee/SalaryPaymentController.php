@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Employee;
 
+use App\Employee;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
@@ -14,9 +15,10 @@ class SalaryPaymentController extends Controller
     }
 
     
-    public function create()
+    public function create($id)
     {
-        //
+        $employee = Employee::findOrFail($id);
+        return view('employees.salary.pay',compact('employee'));
     }
 
     

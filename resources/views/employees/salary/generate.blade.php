@@ -44,11 +44,17 @@
                             <td>:</td>
                             <td>{{$employee->salary}} Tk.</td>
                         </tr>
+
+                        <tr class="bg-danger">
+                            <th>Payable Salary</th>
+                            <td>:</td>
+                            <td>{{$employee->payable()->payable_salary ?? '0'}} Tk.</td>
+                        </tr>
                     </table>
                 </div>
             </div>
 
-        <form action="{{route('salary-payable.store')}}" method="POST">
+        <form action="{{route('salary-payable.generate')}}" method="POST">
               {{ csrf_field() }}
                 <input type="hidden" name="employee_id" value="{{$employee->id}}">
                 <div class="form-row">
@@ -56,20 +62,26 @@
                  <label for="month" class="text-capitalize">Month</label>
                  <select id="month" type="text" name="month" class="form-control @error('month') is-invalid @enderror">
                     <option value="">Choose Month</option>
-                   
-                    <option value="1">January</option>
-                    <option value="2">February</option>
-                    <option value="3">March</option>
-                    <option value="4">April</option>
-                    <option value="5">May</option>
-                    <option value="6">June</option>
-                    <option value="7">July</option>
-                    <option value="8">August</option>
-                    <option value="9">September</option>
-                    <option value="10">October</option>
-                    <option value="11">November</option>
-                    <option value="12">December</option>
-                    </select>
+                    @php
+                               $m = [   1 => 'January',
+                                        2 => 'February',
+                                        3 => 'March',
+                                        4 => 'April',
+                                        5 => 'May',
+                                        6 => 'June',
+                                        7 => 'July',
+                                        8 => 'August',
+                                        9 => 'September',
+                                        10 => 'October',
+                                        11 => 'November',
+                                        12 => 'December' ];
+                                $dueMonth = $employee->payableMonths();
+                           @endphp
+
+                            @for ($month = 1; $month <= 12; $month++)
+                            <option {{date('m') == $month ? 'selected' : ''}}  value="{{$month}}">{{$m[$month]}}</option>
+                            @endfor
+                </select>
                  @error('month')
                       <div class=" text-danger">{{ $message }}</div>
                  @enderror
@@ -87,10 +99,7 @@
                 <input type="checkbox" name="ignore_leave" class="form-check-input" id="ignore_leave">
                 <label class="form-check-label" for="ignore_leave">Ignore leave</label>
           </div>
-            <div class="form-group form-check">
-                <input type="checkbox" name="paid" class="form-check-input" id="paid">
-                <label class="form-check-label" for="paid">Paid</label>
-          </div>
+           
                 <button type="submit" class="btn btn-primary">Generate Salary</button>
               </form>
         </div>

@@ -39,5 +39,10 @@ Route::get('department/search', 'Employee\DepartmentController@search')->name('d
 Route::resource('employees', 'Employee\EmployeeController');
 Route::get('employee/search', 'Employee\EmployeeController@search')->name('employees-search');
 
-//SALARY
-Route::resource('salary-payable', 'Employee\PayableSalaryController');
+//SALARY PAYABLE
+// Route::resource('salary-payable', 'Employee\PayableSalaryController');
+Route::get('salary-payable/create/{id}', 'Employee\PayableSalaryController@create')->name('salary-payable.create');
+Route::post('salary-payable/generate', 'Employee\PayableSalaryController@generate')->name('salary-payable.generate');
+//SALARY PAYMENT
+Route::get('salary-pay/create/{id}', 'Employee\SalaryPaymentController@create')->name('salary-pay.create');
+Route::post('salary-pay', 'Employee\SalaryPaymentController@pay')->name('salary-pay');
