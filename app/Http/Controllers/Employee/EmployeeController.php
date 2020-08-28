@@ -158,7 +158,7 @@ class EmployeeController extends Controller
             $fileName = 'employee-'.time().'.webp';
 
             // resize image
-            $img->fit(480, 480)->sharpen(8)->save('uploads/employee/'.$fileName);
+            $img->resize(480, 500)->sharpen(9)->save('uploads/employee/'.$fileName);
             // $img->resize(500, 500)->sharpen()->save(productImgCover().$fileName);
             // $img->resize(125, 120)->sharpen()->save(productImgThumbnil().$fileName);
 

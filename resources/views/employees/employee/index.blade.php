@@ -78,12 +78,12 @@
                             </div>
 
                             <div class="btn-group mb-2 shadow-sm" role="group" >
-                                <a title="Generate Salary" href="{{route('salary-payable.create',$employee->id)}}"
-                                class="btn btn-sm  btn-outline-dark">Salary</a>
+                                {{-- <a title="Generate Salary" href="{{route('salary-payable.create',$employee->id)}}"
+                                class="btn btn-sm  btn-outline-dark">Salary</a> --}}
                             <a title="Pay Salary" href="{{route('salary-pay.create',$employee->id)}}"
-                                class="btn btn-sm  btn-outline-dark">Pay </a>
-                                <a title="Salary Payments History" href="{{route('salary-pay.create',$employee->id)}}"
-                                    class="btn btn-sm  btn-outline-dark">Payments </a>
+                                class="btn btn-sm  btn-outline-dark">Salary </a>
+                                {{-- <a title="Salary Payments History" href="{{route('salary-pay.create',$employee->id)}}"
+                                    class="btn btn-sm  btn-outline-dark">Payments </a> --}}
                                 
                             </div>
                         </td>

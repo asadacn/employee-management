@@ -45,7 +45,7 @@ class PayableSalaryController extends Controller
             }
             
             $hasPayable = PayableSalary::where('employee_id',$request->employee_id)
-                                              ->where('is_paid','no')
+                                              ->where('year',date('Y'))
                                               ->where('month',$request->month)
                                               ->get();
 

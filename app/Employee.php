@@ -20,7 +20,7 @@ class Employee extends Model
 
     public function payable()
     {
-        $payable = \App\PayableSalary::where('employee_id',$this->id)->where('is_paid','no')->latest()->first();
+        $payable = \App\PayableSalary::where('employee_id',$this->id)->where('is_paid','no')->orderBy('month','desc')->first();
         return $payable;
     }
 
