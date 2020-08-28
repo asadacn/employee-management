@@ -24,6 +24,12 @@ class Employee extends Model
         return $payable;
     }
 
+    public function payables() //get all payable salaries
+    {
+        $payables = \App\PayableSalary::where('employee_id',$this->id)->where('is_paid','no')->latest()->get();
+        return $payables;
+    }
+
     public function payableMonths()
     {
         $month = \App\PayableSalary::where('employee_id',$this->id)->where('is_paid','no')->where('year',date('Y'))->pluck('month');
@@ -32,6 +38,7 @@ class Employee extends Model
 
     public function payments()
     {
-        //$payments = \App\SalaryPayment::wherewhere('employee_id',$this->id)
+        $payments = \App\SalaryPayment::where('employee_id',$this->id)->orderBy('paid_at')->get();
+        return $payments;
     }
 }

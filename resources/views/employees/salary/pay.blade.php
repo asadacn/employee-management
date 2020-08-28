@@ -7,6 +7,7 @@
 @stop
 
 @section('content')
+<div class="row">
 <div class="card col-lg-6">
     <div class="card-header">Pay Employee Salary</div>
     <div class="card-body">
@@ -97,6 +98,7 @@
                     <div class=" text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+            <input type="hidden" name="payable_salary_id" value="{{$employee->payable()->id ?? null}}">
                 <div class="form-group col-4">
                     <label for="paid_at" class="text-capitalize">Paid at</label>
                     <input id="paid_at" type="date" name="paid_at"
@@ -126,6 +128,37 @@
         </div>
         @endif
     </div>
+</div>
+<div class="col-lg-6">
+    <div class="card">
+        <div class="card-header">Payments</div>
+        <div class="card-body">
+            <table class="table table-sm">
+                <thead>
+                    <th>Sn.</th>
+                    <th>Month</th>
+                    <th>Amount</th>
+                    <th>Paid at (Date)</th>
+                    <th>Paid_By</th>
+                </thead>
+                @php
+                    $i=1;
+                @endphp
+                <tbody>
+                    @foreach ($employee->payments() as $payment)
+                        <tr>
+                        <td>{{$i++}}</td>
+                        <td>{{$m[$payment->month]}}</td>
+                        <td>{{$payment->amount}}</td>
+                        <td>{{$payment->paid_at}}</td>
+                        <td>{{$payment->paid_by ?? 'N/A'}}</td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
 </div>
 @stop
 

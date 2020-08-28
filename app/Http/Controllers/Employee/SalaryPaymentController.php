@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Employee;
 
 use App\Employee;
 use App\Http\Controllers\Controller;
+use App\SalaryPayment;
 use Illuminate\Http\Request;
 
 class SalaryPaymentController extends Controller
@@ -30,7 +31,19 @@ class SalaryPaymentController extends Controller
             'month'    => 'required|numeric'
         ]);
 
+        $pay = new SalaryPayment();
         
+        $pay->employee_id = $request->employee_id;
+        $pay->payable_salary_id = $request->payable_salary_id;
+        $pay->month = $request->month;
+        $pay->amount = $request->amount;
+        $pay->paid_at = $request->paid_at;
+
+        if($pay->save()){
+            return redirect()->back()->with('success','Employee Salary Payment Successful');
+        }else{
+            return redirect()->back()->with('failed','Employee Salary Payment Failed');
+        }
     }
 
    
