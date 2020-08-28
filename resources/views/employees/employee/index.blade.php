@@ -82,6 +82,8 @@
                                 class="btn btn-sm  btn-outline-dark">Salary</a>
                             <a title="Pay Salary" href="{{route('salary-pay.create',$employee->id)}}"
                                 class="btn btn-sm  btn-outline-dark">Pay </a>
+                                <a title="Salary Payments History" href="{{route('salary-pay.create',$employee->id)}}"
+                                    class="btn btn-sm  btn-outline-dark">Payments </a>
                                 
                             </div>
                         </td>

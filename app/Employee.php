@@ -29,4 +29,9 @@ class Employee extends Model
         $month = \App\PayableSalary::where('employee_id',$this->id)->where('is_paid','no')->where('year',date('Y'))->pluck('month');
         return $month;
     }
+
+    public function payments()
+    {
+        //$payments = \App\SalaryPayment::wherewhere('employee_id',$this->id)
+    }
 }

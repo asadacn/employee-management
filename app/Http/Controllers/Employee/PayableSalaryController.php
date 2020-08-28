@@ -87,12 +87,7 @@ class PayableSalaryController extends Controller
     
     public function update(Request $request, $id)
     {
-        $request->validate([
-            'amount' => 'numeric|required',
-            'paid_at' => 'required'
-        ]);
-
-        
+        //        
     }
 
     

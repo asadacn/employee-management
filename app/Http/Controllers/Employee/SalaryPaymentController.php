@@ -22,9 +22,15 @@ class SalaryPaymentController extends Controller
     }
 
     
-    public function store(Request $request)
+    public function pay(Request $request)
     {
-        //
+        $request->validate([
+            'amount'   => 'numeric|required',
+            'paid_at'  => 'required|date',
+            'month'    => 'required|numeric'
+        ]);
+
+        
     }
 
    
@@ -49,5 +55,9 @@ class SalaryPaymentController extends Controller
     public function destroy($id)
     {
         //
+    }
+    public function EmployeePayments()
+    {
+        
     }
 }
