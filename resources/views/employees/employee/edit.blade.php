@@ -114,7 +114,7 @@
           <div class="form-group col-md-4">
             <label for="photo" class="text-capitalize">Photo</label>
             <input id="photo" type="file" name="photo" class="form-control @error('photo') is-invalid @enderror" >
-            <img class="shadow-sm rounded m-2" src="{{asset('uploads/employee')}}/{{$employee->photo}}" alt="img" width="100px">
+            <img class="shadow-sm rounded m-2" src="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}" alt="img" width="100px">
             @error('photo')
                  <div class=" text-danger">{{ $message }}</div>
             @enderror

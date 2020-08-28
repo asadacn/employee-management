@@ -1,9 +1,9 @@
 @extends('adminlte::page')
 
-@section('title', 'Salary - Pay')
+@section('title', 'Salary - Payments')
 
 @section('content_header')
-<h1 class="h4 text-uppercase">Salary - Pay</h1>
+<h1 class="h4 text-uppercase">Salary -Payments</h1>
 @stop
 
 @section('content')
@@ -35,10 +35,10 @@ $statusClass =[
 @endphp
 <div class="row">
 <div class="card col-lg-6">
-    <div class="card-header">Pay Employee Salary</div>
+    {{-- <div class="card-header h5"> Employee Salary</div> --}}
     <div class="card-body">
         <div class="card">
-            <div class="card-header">Employee Information</div>
+            <div class="card-header h5">Employee Information</div>
             <div class="card-body">
                 <table class="table table-sm">
                     <tr>
@@ -80,6 +80,7 @@ $statusClass =[
                         <td>{{$employee->salary}} Tk.</td>
                     </tr>
 
+                    @if ($employee->payables()->isNotEmpty())
 
                     <tr class="bg-secondary">
                         <th>Payable Salary - Last Month ({{$employee->payable() ? $m[$employee->payable()->month] : 'N/A'}})</th>
@@ -91,11 +92,17 @@ $statusClass =[
                         <td>:</td>
                         <td class="font-weight-bold">{{$employee->payables()->sum('payable_salary') ?? '0'}} Tk.</td>
                     </tr>
+
+                    @endif
+
                 </table>
             </div>
         </div>
+
+        @if ($employee->payables()->isNotEmpty())
+            
         <div class="card">
-            <div class="card-header">Payable Salaries</div>
+            <div class="card-header h5">Payable Salaries</div>
             <div class="card-body">
                 <table class="table table-sm table-bordered">
                     <thead class="thead-light">
@@ -200,7 +207,7 @@ $statusClass =[
                 </table>
             </div>
         </div>
-
+    @endif
 
         <form action="{{route('salary-payable.generate')}}" method="POST">
             {{ csrf_field() }}
@@ -254,17 +261,21 @@ $statusClass =[
         @endif
     </div>
 </div>
+@if ($employee->payments()->isNotEmpty())
 <div class="col-lg-6">
     <div class="card">
-        <div class="card-header">Payments</div>
+        <div class="card-header h5">Payments History</div>
         <div class="card-body">
             <table class="table table-sm table-bordered">
                 <thead class="thead-light ">
                     <th>Sn.</th>
                     <th>Month</th>
-                    <th>Amount</th>
+                    <th>Year</th>
+                    <th>Payable (Tk.)</th>
+                    <th>Paid (Tk.)</th>
                     <th>Paid at (Date)</th>
                     <th>Paid_By</th>
+                    <th>Status</th>
                 </thead>
                 @php
                     $i=1;
@@ -274,20 +285,24 @@ $statusClass =[
                         <tr>
                         <td>{{$i++}}</td>
                         <td>{{$m[$payment->month]}}</td>
+                        <td>{{$payment->salaryInfo->year}}</td>
+                        <td>{{$payment->salaryInfo->payable_salary}}</td>
                         <td>{{$payment->amount}}</td>
                         <td>{{$payment->paid_at}}</td>
                         <td>{{$payment->paid_by ?? 'N/A'}}</td>
+                        <td class="text-uppercase">{{$payment->salaryInfo->is_paid}}</td>
                         </tr>
                     @endforeach
                 </tbody>
             </table>
         </div>
         <div class="card-footer"> 
-            <small class="text-muted"> Total Payable : {{$employee->payables()->sum('payable_salary') ?? '0'}} Tk. [Paid : {{$employee->payments()->sum('amount') ?? '0'}} Tk.]</small> <br>
+            <small class="text-muted"> Payable : {{$employee->payables()->sum('payable_salary') ?? '0'}} Tk. [Paid : {{$employee->payments()->sum('amount') ?? '0'}} Tk.]</small> <br>
 
         </div>
     </div>
 </div>
+@endif
 </div>
 </div>
 @stop

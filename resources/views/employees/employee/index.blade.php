@@ -22,7 +22,19 @@
             </div>
             </form>
         </div>
-          
+     
+        @php
+            $status =[
+            1=>'Active',
+            2=>'Inactive',
+            3=>'Closed'
+        ];
+        $statusClass =[
+            1=>'badge-success',
+            2=>'badge-warning',
+            3=>'badge-danger'
+        ];
+        @endphp
        
        @if(session()->has('success'))
        <div class="alert alert-success h5 my-2">
@@ -38,6 +50,7 @@
                 <th>Department</th>
                 <th>Rank</th>
                 <th>Contact</th>
+                <th>Status</th>
                 <th class="text-center">Actions</th>
             </thead>
             <tbody>
@@ -57,6 +70,7 @@
                     <td>{{$employee->department->title}}</td>
                     <td>{{$employee->rank->title}}</td>
                     <td>{{$employee->contact_no}}</td>
+                    <td ><span class=" badge badge-pill  {{$statusClass[$employee->status]}}"> {{$status[$employee->status]}} </span></td>
                 
                         <td class="text-center">
                             <div class="btn-group mb-2 shadow-sm" role="group">

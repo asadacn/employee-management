@@ -48,7 +48,7 @@
                     <tr>
                     <td>{{++$i}}</td>
                     <td>{{$rank->title}}</td>
-                    <td>{{$rank->description}}</td>
+                    <td>{{$rank->description ?? "N/A"}}</td>
                         <td><div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{route('ranks.edit',$rank->id)}}" class="btn btn-sm rounded-0 btn-secondary">Edit</a>
                         <form action="{{ route('ranks.destroy', $rank->id)}}" method="post">

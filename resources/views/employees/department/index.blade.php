@@ -48,7 +48,7 @@
                     <tr>
                     <td>{{++$i}}</td>
                     <td>{{$department->title}}</td>
-                    <td>{{$department->description}}</td>
+                    <td>{{$department->description ?? "N/A"}}</td>
                         <td><div class="btn-group" role="group" aria-label="Basic example">
                         <a href="{{route('departments.edit',$department->id)}}" class="btn btn-sm rounded-0 btn-secondary">Edit</a>
                         <form action="{{ route('departments.destroy', $department->id)}}" method="post">

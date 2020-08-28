@@ -32,16 +32,13 @@ class PayableSalaryController extends Controller
 
         
         $employee  =  Employee::findOrFail($request->employee_id);
-        $payable_salary = 0;
+        $payable_salary = $employee->salary;
         $year =date('Y');
 
-            if($request->leave){
-                
-                if($request->ignore_leave){
-                    $payable_salary = $employee->salary;
-                }else{
+            if($request->leave && $request->ignore_leave !='on'){
+  
                     $payable_salary = ($employee->salary * (30-$request->leave))/30;
-                }
+               
             }
 
             
