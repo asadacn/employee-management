@@ -36,13 +36,14 @@ class PayableSalaryController extends Controller
         $year =date('Y');
 
             if($request->leave){
-                $payable_salary = ($employee->salary * (30-$request->leave))/30;
+                
+                if($request->ignore_leave){
+                    $payable_salary = $employee->salary;
+                }else{
+                    $payable_salary = ($employee->salary * (30-$request->leave))/30;
+                }
             }
-            elseif($request->ignore_leave){
-                $payable_salary = $employee->salary;
-            }else{
-                $payable_salary =$employee->salary;
-            }
+
             
             $hasPayable = PayableSalary::where('employee_id',$request->employee_id)
                                               ->where('year',date('Y'))
@@ -58,7 +59,7 @@ class PayableSalaryController extends Controller
             $payable->employee_id = $request->employee_id ;
             $payable->leave = $request->leave ;
             $payable->leave_ignore = $request->ignore_leave =='on' ? 'Yes' : 'No';
-            $payable->payable_salary = $payable_salary ;
+            $payable->payable_salary = round($payable_salary) ;
             $payable->month = $request->month ;
             $payable->year = $year ;
             // $payable->is_paid = $request->paid == 'on' ? 'Yes' : 'No';
