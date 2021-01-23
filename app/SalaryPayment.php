@@ -10,4 +10,9 @@ class SalaryPayment extends Model
     {
         return $this->belongsTo(PayableSalary::class,'payable_salary_id');
     }
+
+    public function employee()
+    {
+        return $this->belongsTo(Employee::class);
+    }
 }

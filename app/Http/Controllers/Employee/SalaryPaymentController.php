@@ -37,21 +37,24 @@ class SalaryPaymentController extends Controller
         $pay->employee_id = $request->employee_id;
         $pay->payable_salary_id = $request->payable_salary_id;
         $pay->month = $request->month;
+        $pay->year = date('Y');
         $pay->amount = $request->amount;
         $pay->paid_at = $request->paid_at;
-
+        $due =$pay->employee->monthly_due( $pay->month, $pay->year);
         if($pay->save()){
             
-            $payable = PayableSalary::findOrFail($request->payable_salary_id);
-            if ($request->amount >= $payable->payable_salary ) {
+            $payable = PayableSalary::findOrFail($request->payable_salary_id); 
+            
+            if ($request->amount >= $due) {
+               
                 $payable->is_paid = "Yes";
                 $payable->save();
             }
 
-            if($request->paid){
-                $payable->is_paid = "Yes";
-                $payable->save();
-            }
+            // if($request->paid){
+            //     $payable->is_paid = "Yes";
+            //     $payable->save();
+            // }
 
             return redirect()->back()->with('success','Employee Salary Payment Successful');
         }else{

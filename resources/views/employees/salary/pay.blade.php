@@ -90,7 +90,7 @@ $statusClass =[
                     <tr class="bg-danger">
                         <th>Total Payable Salary</th>
                         <td>:</td>
-                        <td class="font-weight-bold">{{$employee->payables()->sum('payable_salary') ?? '0'}} Tk.</td>
+                        <td class="font-weight-bold">{{$employee->total_due()}} Tk.</td>
                     </tr>
 
                     @endif
@@ -110,6 +110,8 @@ $statusClass =[
                         <th>Month</th>
                         <th>Year</th>
                         <th>Payable salary</th>
+                        <th>Paid</th>
+                        <th>Due</th>
                         <th>Leave</th>
                         <th>Leave Ignored</th>
                         <th>Is Paid</th>
@@ -124,7 +126,9 @@ $statusClass =[
                             <td>{{$i++}}</td>
                             <td>{{$m[$payable->month]}}</td>
                             <td>{{$payable->year}}</td>
-                            <td>{{$payable->payable_salary}}</td>
+                            <td>{{$payable->payable_salary}} Tk.</td>
+                            <td>{{$payable->payable_salary - $employee->monthly_due($payable->month,$payable->year)}} Tk.</td>
+                            <td>{{$employee->monthly_due($payable->month,$payable->year)}} Tk.</td>
                             <td>{{$payable->leave ?? "N/A"}}</td>
                             <td class="text-uppercase">{{$payable->leave_ignore}}</td>
                             <td class="text-uppercase font-weight-bold">{{$payable->is_paid}}</td>
@@ -167,7 +171,7 @@ $statusClass =[
                                                 <div class="form-group col-3">
                                                     <label for="amount" class="text-capitalize">salary amount</label>
                                                     <input type="text" class="form-control " name="amount" placeholder="Salary amount"
-                                                        value="{{$payable->payable_salary ?? 0}}">
+                                                        value="{{$employee->monthly_due($payable->month,$payable->year)}}">
                                                     @error('amount')
                                                     <div class=" text-danger">{{ $message }}</div>
                                                     @enderror
@@ -183,10 +187,10 @@ $statusClass =[
                                                 </div>
                                 
                                             </div>
-                                            <div class="form-group form-check">
+                                            {{-- <div class="form-group form-check">
                                                 <input type="checkbox" name="paid" class="form-check-input" id="paid">
                                                 <label class="form-check-label" for="paid">Paid</label>
-                                            </div>
+                                            </div> --}}
                                             <button type="submit" class="btn btn-primary">Pay Salary</button>
                                         </form>
                                     </div>
@@ -297,7 +301,7 @@ $statusClass =[
             </table>
         </div>
         <div class="card-footer"> 
-            <small class="text-muted"> Payable : {{$employee->payables()->sum('payable_salary') ?? '0'}} Tk. [Paid : {{$employee->payments()->sum('amount') ?? '0'}} Tk.]</small> <br>
+            <small class="text-muted"> Payable : {{$employee->total_due() ?? 0}} Tk. [Paid : {{$employee->payments()->sum('amount') ?? '0'}} Tk.]</small> <br>
 
         </div>
     </div>

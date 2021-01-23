@@ -19,6 +19,7 @@ class CreateSalaryPayments extends Migration
             $table->unsignedBigInteger('payable_salary_id');
             $table->double('amount')->comment('amount of paid salary');
             $table->string('month')->comment('month of payment');
+            $table->year('year')->comment('month of payment');
             $table->date('paid_at')->comment('date of payment');
             $table->integer('paid_by')->nullable()->comment('person who paid the payment');
             $table->timestamps();
