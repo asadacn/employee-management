@@ -146,25 +146,7 @@
          </form>
    </div>
    <div class="card-footer">
-    @if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-       @if(session()->has('success'))
-       <div class="alert alert-success h5">
-           {{ session()->get('success') }}
-       </div>
-       @endif
-       @if(session()->has('failed'))
-       <div class="alert alert-danger h5">
-           {{ session()->get('failed') }}
-       </div>
-       @endif
+    @include('employees.alert')
    </div>
 </div>
 @stop
