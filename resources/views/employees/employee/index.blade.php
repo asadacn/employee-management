@@ -3,7 +3,7 @@
 @section('title', 'Employee')
 
 @section('content_header')
-<h1 class="h4 text-uppercase">Employee - List</h1>
+<h1 class="h4 text-uppercase">{{__('employee')}} - {{__('list')}}</h1>
 @stop
 
 @section('content')
@@ -17,7 +17,7 @@
            
                 <input type="search" class="form-control " name="search" placeholder="Search Employees" aria-label="Search Employees" aria-describedby="button-addon2" required>
                 <div class="input-group-append">
-                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">Search</button>
+                  <button class="btn btn-outline-secondary" type="submit" id="button-addon2">{{__('search')}}</button>
                 </div>
             </div>
             </form>
@@ -44,19 +44,19 @@
         <div class="card-body table-responsive">
             <table class="table table-bordered">
             <thead class="text-uppercase thead-light">
-                <th>SN.</th>
-                <th>Image</th>
-                <th>Name</th>
-                <th>Department</th>
-                <th>Rank</th>
-                <th>Contact</th>
-                <th>Status</th>
-                <th class="text-center">Actions</th>
+                <th>{{__('SN.')}}</th>
+                <th>{{__('image')}}</th>
+                <th>{{__('name')}}</th>
+                <th>{{__('department')}}</th>
+                <th>{{__('rank')}}</th>
+                <th>{{__('contact')}}</th>
+                <th>{{__('status')}}</th>
+                <th class="text-center">{{__('actions')}}</th>
             </thead>
             <tbody>
                 @if($employees->isEmpty())
                 <tr>
-                    <td colspan="7"> <div class="alert alert-secondary h4 text-center">NO DATA AVAILABLE</div></td>
+                    <td colspan="7"> <div class="alert alert-secondary h4 text-center">{{__('NO DATA AVAILABLE')}}</div></td>
                 </tr>
                 @endif
                @php
@@ -82,7 +82,7 @@
                                     @csrf
                                     @method('DELETE')
                                     <button class="btn rounded-0  btn-sm btn-light"
-                                      title="Delete"  onclick="return confirm('Do you want to delete ?')"
+                                      title="Delete"  onclick="return confirm('{{__('Do you want to delete')}} ?')"
                                         type="submit"><i class="fas fa-trash-alt"></i></button>
                                 </form>
                                 {{-- <a title="Generate Salary" href="{{route('salary-payable.create')}}"
@@ -95,7 +95,7 @@
                                 {{-- <a title="Generate Salary" href="{{route('salary-payable.create',$employee->id)}}"
                                 class="btn btn-sm  btn-outline-dark">Salary</a> --}}
                             <a title="Pay Salary" href="{{route('salary-pay.create',$employee->id)}}"
-                                class="btn btn-sm  btn-outline-dark">Salary </a>
+                                class="btn btn-sm  btn-outline-dark">{{__('salary')}} </a>
                                 {{-- <a title="Salary Payments History" href="{{route('salary-pay.create',$employee->id)}}"
                                     class="btn btn-sm  btn-outline-dark">Payments </a> --}}
                                 

@@ -3,7 +3,7 @@
 @section('title', 'Salary - Generate')
 
 @section('content_header')
-    <h1 class="h4 text-uppercase">Salary - Generate</h1>
+    <h1 class="h4 text-uppercase">{{__('salary')}} - {{__('generate')}}</h1>
 @stop
 
 @section('content')
@@ -11,44 +11,44 @@
        <div class="card-header">Generate Employee Salary</div>
         <div class="card-body">
             <div class="card">
-                <div class="card-header">Employee Information</div>
+                <div class="card-header">{{__('employee')}} {{__('information')}}</div>
                 <div class="card-body">
                     <table class="table table-striped table-sm">
                         <tr>
-                            <th>Photo</th>
+                            <th>{{__('photo')}}</th>
                             <td>:</td>
                         <td><img class="rounded shadow-sm" src="{{$employee->photo ? asset('uploads/employee').'/'.$employee->photo : asset('uploads/employee').'/'.'avatar.jpg'}}" alt="img" width="80px"></td>
                         </tr>
                         <tr>
-                            <th>Name</th>
+                            <th>{{__('name')}}</th>
                             <td>:</td>
                             <td>{{$employee->name}}</td>
                         </tr>
                         <tr>
-                            <th>Contact</th>
+                            <th>{{__('contact')}}</th>
                             <td>:</td>
                             <td>{{$employee->contact_no}}</td>
                         </tr>
                         <tr>
-                            <th>Department</th>
+                            <th>{{__('department')}}</th>
                             <td>:</td>
                             <td>{{$employee->department->title}}</td>
                         </tr>
                         <tr>
-                            <th>Rank</th>
+                            <th>{{__('rank')}}</th>
                             <td>:</td>
                             <td>{{$employee->rank->title}}</td>
                         </tr>
                         <tr>
-                            <th>Salary</th>
+                            <th>{{__('salary')}}</th>
                             <td>:</td>
-                            <td>{{$employee->salary}} Tk.</td>
+                            <td>{{$employee->salary}} {{__('Tk.')}}</td>
                         </tr>
 
                         <tr class="bg-danger">
                             <th>Payable Salary</th>
                             <td>:</td>
-                            <td>{{$employee->payable()->payable_salary ?? '0'}} Tk.</td>
+                            <td>{{$employee->payable()->payable_salary ?? '0'}} {{__('Tk.')}}</td>
                         </tr>
                     </table>
                 </div>
